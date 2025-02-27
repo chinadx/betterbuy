@@ -55,6 +55,7 @@
             text-align: center;
             font-size: 18px;
             color: #333;
+            white-space: pre-line;
         }
         .product-box {
             padding: 15px;
@@ -71,7 +72,27 @@
             display: flex;
             justify-content: space-between;
         }
+        .result-container {
+            margin-top: 20px;
+        }
+        .result {
+            margin-bottom: 10px;
+        }
+        .price-details {
+            font-size: 0.8em;
+            color: #666;
+        }
     </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?0135cc552bbed3b8c310e4cfde581afe";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
 </head>
 <body>
     <div class="container">
@@ -108,11 +129,17 @@
             </div>
         </form>
 
-        {% if result %}
-        <div class="result">
-            {{ result }}
+        <div class="result-container">
+            <div id="result" class="result {% if result %}show{% endif %}">
+                {{ result|safe }}
+                <div class="price-details">
+                    {% if price1 and price2 %}
+                        商品1单价：{{ "%.2f"|format(price1) }}元<br>
+                        商品2单价：{{ "%.2f"|format(price2) }}元
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        {% endif %}
     </div>
 </body>
 </html>
