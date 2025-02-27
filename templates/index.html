@@ -55,6 +55,7 @@
             text-align: center;
             font-size: 18px;
             color: #333;
+            white-space: pre-line;
         }
         .product-box {
             padding: 15px;
@@ -70,6 +71,16 @@
         .button-group {
             display: flex;
             justify-content: space-between;
+        }
+        .result-container {
+            margin-top: 20px;
+        }
+        .result {
+            margin-bottom: 10px;
+        }
+        .price-details {
+            font-size: 0.8em;
+            color: #666;
         }
     </style>
 </head>
@@ -108,11 +119,17 @@
             </div>
         </form>
 
-        {% if result %}
-        <div class="result">
-            {{ result }}
+        <div class="result-container">
+            <div id="result" class="result {% if result %}show{% endif %}">
+                {{ result|safe }}
+                <div class="price-details">
+                    {% if price1 and price2 %}
+                        商品1单价：{{ "%.2f"|format(price1) }}元<br>
+                        商品2单价：{{ "%.2f"|format(price2) }}元
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        {% endif %}
     </div>
 </body>
 </html>
